@@ -2,7 +2,7 @@
 
 class Projectile {
   
-  public double theta,m,x,y,vx,vy;
+  public double theta,m,x,y,vx,vy,v;
   public PImage image;
  Projectile (double theta0, double m, double x0, double y0,double v0,PImage image){
   this.x=x0;
