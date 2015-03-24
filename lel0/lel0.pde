@@ -7,7 +7,7 @@ int Fe = 10;
 int xOrigin = 10;
 int yOrigin = height-10;
 
-int tauxMPix = 200;
+int tauxMPix = 50;
 
 
 void updateYOrigin(){
@@ -35,7 +35,7 @@ int yToDisplay (float y) {
 }
 
 void setup() {
-  size(1368, 768);
+  size(800, 600);
   updateYOrigin();
   frameRate(10);
   fill(255);
@@ -54,7 +54,7 @@ void setup() {
    // fond d'ecran blanc
    background(255);
    
-   // une autre image, on s'en fou
+   //Image du socle
    img2 = loadImage("socle.png");
    
 }
@@ -69,7 +69,7 @@ void draw() {
   
   // image du socle du tank
   image(img2,10,height-160,150,150);
-  // actualise l'angle de l'image image
+  // actualise l'angle de l'image du canon
   image.update(mouseX, mouseY);
   // fonction d'affichage de la classe image definie ci dessous
   image.display();
@@ -83,10 +83,10 @@ void draw() {
 class Dot {
   public static final int sizeOfDot = 10;
   public int x, y;
- public Dot (float x,float y){
-  this.x=xToDisplay(x);
- this.y=yToDisplay(y); 
- }
+  public Dot (float x,float y){
+      this.x=xToDisplay(x);
+      this.y=yToDisplay(y); 
+  }
    void display(){
      ellipse(x,y,5,5);
      //text("x ="+x+" y="+y,x, y);
