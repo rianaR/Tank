@@ -4,28 +4,58 @@ PImage img,img2;
 Image image;
 int Fe = 10;
 
+int xOrigin = 10;
+int yOrigin = height-10;
+
+int tauxMPix = 200;
+
+
+void updateYOrigin(){
+yOrigin = height-10; 
+}
+
+// conversion pixels en metres
+float pixToMetres ( int pix){
+ return pix/tauxMPix; 
+}
+
+// conversion metres en pixels
+int metresToPix ( float m){
+ return (int)(m*tauxMPix); 
+}
+
+
+// Conversion metres en pixels  
+int xToDisplay (float x) {
+  return (int)(metresToPix(x)+xOrigin);  
+}
+
+int yToDisplay (float y) {
+  return (int)(yOrigin-metresToPix(y));
+}
+
 void setup() {
   size(1368, 768);
+  updateYOrigin();
   frameRate(10);
   fill(255);
 
   // image du canon
   // les images doivent etre dans le fichier data
-   img = loadImage("lel.png");
+   img = loadImage("lanceur.png");
    
-  // taille de l'image
-   int imSize = 50;
-   
+  
   // La classe image permet d'avoir une methode update specifique
   // en l'occurence redessinne l'image du cannon en fonction de l'angle
   // on pourait avoir plusieurs canon lel
-   image = new Image (imSize,height-imSize,imSize,imSize,img);
+  // arguments : postitionx positiony taillex tailley, image
+   image = new Image (86,height-110,150,25,img);
    
    // fond d'ecran blanc
    background(255);
    
    // une autre image, on s'en fou
-   img2 = loadImage("lel.png");
+   img2 = loadImage("socle.png");
    
 }
 
@@ -37,17 +67,35 @@ void draw() {
    // successifs se redessinnent
   background(225);
   
+  // image du socle du tank
+  image(img2,10,height-160,150,150);
   // actualise l'angle de l'image image
   image.update(mouseX, mouseY);
   // fonction d'affichage de la classe image definie ci dessous
   image.display();
   
-  // fonction d'affichage par defaut de processing
-  image(img2,500,500,50,50);
+  Dot d = new Dot(3,3);
+  d.display();
+  
 }
 
 
+class Dot {
+  public static final int sizeOfDot = 10;
+  public int x, y;
+ public Dot (float x,float y){
+  this.x=xToDisplay(x);
+ this.y=yToDisplay(y); 
+ }
+   void display(){
+     ellipse(x,y,5,5);
+     //text("x ="+x+" y="+y,x, y);
+   } 
+}
+
 class Image {
+  public static final float MAX_ANGLE = 0.2;
+  public static final float MIN_ANGLE = -0.3;
   public int x, y;
   int sizex,sizey;
   public float angle = 0.0;
@@ -65,7 +113,7 @@ class Image {
      text("Angle "+angle, 10, 30);
      // texte de couleur nor
      fill(0);
-    text("Position "+x+";"+y, 10, 60);
+    text("Position "+mouseX+";"+(height-mouseY), 10, 60);
     
     // pup et push matrix permette d'applique les transfo
     // uniquement aux objet dessinés entre les 2
@@ -73,7 +121,11 @@ class Image {
       // les translations permette de faire une rotation
       // par le centre
      translate(x,y);
-     rotate(angle);
+     if (angle >=MAX_ANGLE)
+       angle = MAX_ANGLE;
+     if (angle <= MIN_ANGLE)
+       angle = MIN_ANGLE;
+       rotate(angle);
      //translate(-img.width/2, -img.height/2);
      image(img,-sizex/2,-sizey/2,sizex,sizey);
       popMatrix();
