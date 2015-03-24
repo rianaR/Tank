@@ -66,13 +66,15 @@ void draw() {
    // Repeint une toile blanche pour ne pas que les dessins
    // successifs se redessinnent
   background(225);
-  
-  // image du socle du tank
-  image(img2,10,height-160,150,150);
+
   // actualise l'angle de l'image image
   image.update(mouseX, mouseY);
   // fonction d'affichage de la classe image definie ci dessous
   image.display();
+  
+    
+  // image du socle du tank
+  image(img2,10,height-160,150,150);
   
   Dot d = new Dot(3,3);
   d.display();
@@ -95,7 +97,7 @@ class Dot {
 
 class Image {
   public static final float MAX_ANGLE = 0.2;
-  public static final float MIN_ANGLE = -0.3;
+  public static final float MIN_ANGLE = -0.4;
   public int x, y;
   int sizex,sizey;
   public float angle = 0.0;
