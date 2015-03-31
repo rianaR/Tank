@@ -1,14 +1,21 @@
 float angle;
 float jitter;
 PImage img,img2;
-Image image;
+Image imageLanceur;
 int Fe = 10;
 
 int xOrigin = 10;
 int yOrigin = height-10;
 
+Image imageProjec;
+float m;
+float theta0, x0, y0, v0;
+
 int tauxMPix = 50;
 
+boolean launched;
+
+Projectile projectile;
 
 void updateYOrigin(){
 yOrigin = height-10; 
@@ -31,7 +38,7 @@ int xToDisplay (float x) {
 }
 
 int yToDisplay (float y) {
-  return (int)(yOrigin-metresToPix(y));
+  return (int)(height-yOrigin-metresToPix(y));
 }
 
 void setup() {
@@ -44,19 +51,31 @@ void setup() {
   // les images doivent etre dans le fichier data
    img = loadImage("lanceur.png");
    
-  
+
   // La classe image permet d'avoir une methode update specifique
   // en l'occurence redessinne l'image du cannon en fonction de l'angle
   // on pourait avoir plusieurs canon lel
   // arguments : postitionx positiony taillex tailley, image
-   image = new Image (86,height-110,150,25,img);
+  
+  m=5;
+  
+   imageLanceur = new Image (86,height-110,150,25,img);
+   imageProjec= new Image(86,height-110,100,30,loadImage("projectile.png"));
    
+   //TODO
+   //Position initiale : embouchure du lanceur
+   x0=pixToMetres(86);
+   y0=pixToMetres(height-110);
+   v0=1;
+   theta0=0;
    // fond d'ecran blanc
    background(255);
    
    //Image du socle
    img2 = loadImage("socle.png");
+  
    
+   projectile = new Projectile(theta0,m,x0,y0,v0,imageProjec,1/Fe);
 }
 
 
@@ -70,14 +89,32 @@ void draw() {
   // image du socle du tank
   image(img2,10,height-160,150,150);
   // actualise l'angle de l'image du canon
-  image.update(mouseX, mouseY);
+  imageLanceur.update(mouseX, mouseY);
   // fonction d'affichage de la classe image definie ci dessous
-  image.display();
+  imageLanceur.display();
+  
+  if (!launched) {
+      projectile.image.update(mouseX,mouseY);
+  }
+  else {
+      projectile.updateX();
+      projectile.updateY();
+      projectile.updateVx();
+      projectile.updateVy();
+      projectile.updateV();
+      projectile.updateTheta();
+  }
+  projectile.image.display();
   
   Dot d = new Dot(3,3);
   d.display();
   
 }
+
+void mousePressed() {
+    launched=true;
+}
+
 
 
 class Dot {
