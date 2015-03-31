@@ -1,33 +1,40 @@
 public class Observateur {
-    private int x, y;
-    private float theta,rayon;
-    private static final float rotationStep=QUARTER_PI/3;
-    public Observateur(int x0, int y0, float rayon, float theta0) {
-        this.x=x0;
-        this.y=y0;
+    private float x, y;
+    private float x0, y0;
+    private float thetaMobile;
+    private int rayon;
+    private static final float rotationStep=PI/12;
+    public Observateur(float x0, float y0, int rayon, float theta0) {
+        this.x0=x0;
+        this.y0=y0;
         this.rayon=rayon;
-        this.theta=theta0;
+        this.x=x0+rayon;
+        this.y=y0;
+       
+        this.thetaMobile=theta0;
     }
 
-    public void setTheta(float theta) {
-        this.theta=theta;
+    public void setThetaMobile(float thetaMobile) {
+        this.thetaMobile=thetaMobile;
     }
     
-    public int getX() {
+    public float getX() {
         return x;
     }
-    public int getY() {
+    public float getY() {
         return y;
     }
-    public float getRayon() {
+    public int getRayon() {
         return rayon;    
     }
-    public float getTheta() {
-        return theta;
+    public float getThetaMobile() {
+        return thetaMobile;
     }
 
     public void calculerPos() {
-        x=cos(rotationStep)*x-sin(rotationStep)*y;
-        y=sin(rotationStep)*x+cos(rotationStep)*y;
+        System.out.println("Avant : "+x+" "+y);
+        x=cos(rotationStep)*(x-x0)-sin(rotationStep)*(y-y0) + x0;
+        y=sin(rotationStep)*(x-x0)+cos(rotationStep)*(y-y0) + y0;
+        System.out.println("Après : "+x+" "+y);
     }
 }

@@ -1,8 +1,8 @@
 public class Mobile {
-    private int x,y;
-    private int x0, y0;
+    private float x,y;
+    private float x0, y0;
     private int vx, vy;
-    public Mobile(int x0, int y0, int vx, int vy) {
+    public Mobile(float x0, float y0, int vx, int vy) {
         this.x=x0;
         this.y=y0;
         this.x0=x0;
@@ -14,10 +14,10 @@ public class Mobile {
         x=x+vx;
         y=y+vy;
     }
-    public int getX() {
+    public float getX() {
         return x;
     }
-    public int getY() {
+    public float getY() {
         return y;
     }
     public int getVx() {
