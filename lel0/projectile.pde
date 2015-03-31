@@ -33,7 +33,24 @@ class Projectile {
 public void setK ( float k){
   this.k=k;
 }
-  
+
+public void update (){
+ updateX();
+ updateY();
+ updateVx();
+ updateVy(); 
+ updateV();
+ updateTheta();
+ update(image);
+}
+
+
+public void update(Image image){
+ image.x=x;
+ image.y=y;
+ image.angle=theta; 
+}
+
 public float updateX (){
      this.x = 0.5*k*cos(theta)*(2*n - 1)*Te*Te+v0*cos(theta)*Te+x;
      return x;
