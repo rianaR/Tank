@@ -1,4 +1,4 @@
-public Robot {
+public class Robot {
  
  public Robot (){
   
