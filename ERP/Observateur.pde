@@ -21,6 +21,13 @@ public class Observateur {
         this.thetaMobile=thetaMobile;
     }
     
+    public float getX0() {
+        return x0;
+    }
+    public float getY0() {
+        return y0;
+    }
+    
     public float getX() {
         return x;
     }
@@ -44,11 +51,9 @@ public class Observateur {
 
   
     public void nextPos() {
-        System.out.println("Avant : "+x+" "+y);
         float oldX=x;
         float oldY=y;
         x=cos(rotationStep)*(oldX-x0)-sin(rotationStep)*(oldY-y0) + x0;
         y=sin(rotationStep)*(oldX-x0)+cos(rotationStep)*(oldY-y0) + y0;
-        System.out.println("Après : "+x+" "+y);
     }
 }

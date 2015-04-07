@@ -7,7 +7,7 @@ public class Simulateur {
     private List<Mesure> mesures=new ArrayList<Mesure>();
     
     public Simulateur() {
-        this.mobile = new Mobile(200,200,1,1);
+        this.mobile = new Mobile(50,50,1,1);
         this.observateur = new Observateur(300,250,200,0);
         this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
                                             mobile.getX()-observateur.getX()));
@@ -23,7 +23,7 @@ public class Simulateur {
     public void displayMesuresPrises(){
       fill(0);
      text("mesures prises ="+mesures.size(),20,20); 
-     if ( mesures.size() == 4){
+     if ( mesures.size() >= 4){
        text("Algorithme de résolution (pour epsilon nul) disponible",20,40);
        observateur._4mesures=true;
      }
@@ -50,9 +50,6 @@ public class Simulateur {
     }
     
     public void addMesure(Mesure m){
-        if (mesures.size() >= 4) {
-            mesures.remove(0);
-        }
         mesures.add(m);
     }
 
@@ -63,10 +60,11 @@ public class Simulateur {
   
     public double[] calculerParamsMobile() {       
         if (observateur._4mesures) {
-            double[][] a = new double[4][4];
-            double[] b = new double[4];
+            int nbMesures = mesures.size();
+            double[][] a = new double[nbMesures][4];
+            double[] b = new double[nbMesures];
     
-            for (int l=0;l<4;l++) {
+            for (int l=0;l<nbMesures;l++) {
                 Mesure mesure = mesures.get(l);
                 //x0
                 a[l][0]=sin(mesure.theta);
@@ -81,7 +79,7 @@ public class Simulateur {
             }
     
             Matrix A = new Matrix(a);
-            Matrix B = new Matrix(b,4);
+            Matrix B = new Matrix(b,nbMesures);
     
             Matrix res = A.solve(B);
     

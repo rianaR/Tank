@@ -14,6 +14,13 @@ public class Mobile {
         x=x+vx;
         y=y+vy;
     }
+
+    public float getX0() {
+        return x0;
+    }
+    public float getY0() {
+        return y0;
+    }
     public float getX() {
         return x;
     }
