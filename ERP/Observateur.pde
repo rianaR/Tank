@@ -5,7 +5,7 @@ public class Observateur {
     private float rayon;
     private float rotationStep=PI/120;
     
-    public boolean _4mesures;
+    public boolean trajectoireAcquise;
     
     public Observateur(float x0, float y0, float rayon, float theta0) {
         this.x0=x0;
@@ -41,10 +41,7 @@ public class Observateur {
       ellipse(x0,y0,2*rayon,2*rayon);  // Draw gray ellipse using CENTER mode
     }
 
-  public void drawTrajectoire(float x0, float y0,float vx, float vy){
-    float coef = vy/vx;
-    line(x0,y0,1000,1000*coef);
-  }
+
   
     public void calculerPos() {
         System.out.println("Avant : "+x+" "+y);

@@ -15,7 +15,7 @@ void draw() {
   frameRate(10);
     background(255);
     simulateur.getObservateur().drawCircle();
-    simulateur.getObservateur().drawTrajectoire(200,200,1,1);
+    simulateur.drawTrajectoire(200,200,1,1);
     simulateur.update();
     fill(30);
     ellipse(simulateur.getMobile().getX(), simulateur.getMobile().getY(),10,10);
@@ -29,7 +29,7 @@ void draw() {
     }
     
     simulateur.displayMesures();
-
+  simulateur.displayMesuresPrises();
 }
 
 

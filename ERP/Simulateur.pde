@@ -21,13 +21,13 @@ public class Simulateur {
     }
     
     public void displayMesuresPrises(){
--      fill(0);
--     text("mesures prises ="+mesures.size(),20,20); 
--     if ( mesures.size() >= 4){
--       text("Algorithme de résolution (pour epsilon nul) disponible",20,40);
--       observateur._4mesures=true;
--     }
-- }    
+      fill(0);
+     text("mesures prises ="+mesures.size(),20,20); 
+     if ( mesures.size() >= 4){
+       text("Algorithme de résolution (pour epsilon nul) disponible",20,40);
+       observateur._4mesures=true;
+     }
+ }    
 
     public void displayMesures(){
       if (mesures !=null) {
@@ -53,6 +53,11 @@ public class Simulateur {
       mesures.add(m);
     }
 
+  public void drawTrajectoire(float x0, float y0,float vx, float vy){
+    float coef = vy/vx;
+    line(x0,y0,1000,1000*coef);
+  }
+  
     public double[] calculerParamsMobile() {
         Mesure[] mesuresTab = (Mesure[])mesures.toArray();
         double[][] a = new double[4][4];
