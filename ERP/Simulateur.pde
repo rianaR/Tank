@@ -20,7 +20,15 @@ public class Simulateur {
                                             mobile.getX()-observateur.getX()));
     }
     
-    
+    public void displayMesuresPrises(){
+-      fill(0);
+-     text("mesures prises ="+mesures.size(),20,20); 
+-     if ( mesures.size() >= 4){
+-       text("Algorithme de résolution (pour epsilon nul) disponible",20,40);
+-       observateur._4mesures=true;
+-     }
+- }    
+
     public void displayMesures(){
       if (mesures !=null) {
       for (Mesure m : mesures){ 
