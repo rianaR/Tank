@@ -8,7 +8,7 @@ public class Simulateur {
     
     public Simulateur() {
         this.mobile = new Mobile(200,200,1,1);
-        this.observateur = new Observateur(300,300,100,0);
+        this.observateur = new Observateur(300,250,200,0);
         this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
                                             mobile.getX()-observateur.getX()));
     }
