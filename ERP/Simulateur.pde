@@ -1,8 +1,11 @@
+import java.util.*;
+
 public class Simulateur {
     private Mobile mobile;
     private Observateur observateur;
     private Robot robot;
-
+    private Set<Mesure> mesures=new HashSet<Mesure>();
+    
     public Simulateur() {
         this.mobile = new Mobile(50,50,1,1);
         this.observateur = new Observateur(300,300,100,0);
@@ -17,6 +20,16 @@ public class Simulateur {
                                             mobile.getX()-observateur.getX()));
     }
     
+    
+    public void displayMesures(){
+      if (mesures !=null) {
+      for (Mesure m : mesures){ 
+        ellipse(m.xp,m.yp,10,10);
+        text("mesure : ("+m.xp+","+m.yp+")",m.xp,m.yp);
+      }
+      } 
+    }
+    
     public Mobile getMobile() {
         return this.mobile;
     }
@@ -27,4 +40,8 @@ public class Simulateur {
         return this.robot;
     }
     
+    public void addMesure(Mesure m){
+      mesures.add(m);
+    }
+
 }
