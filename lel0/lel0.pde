@@ -106,8 +106,6 @@ void draw() {
     // successifs se redessinnent
     background(225);
 
-    // image du socle du tank
-    image(imageSocle, metresToPix(posSocleX), metresToPix(posSocleY), 150, 150);
 
     //actualise l'angle de lancement du canon en fonction de la souris
     angleLanceur=atan2(mouseY-metresToPix(posLanceurY), mouseX-metresToPix(posLanceurX));
@@ -118,6 +116,10 @@ void draw() {
     projectile.setOrientation(mouseX, mouseY);
 
     projectile.display();
+
+    // image du socle du tank
+    image(imageSocle, metresToPix(posSocleX), metresToPix(posSocleY), 150, 150);
+
     
     //Dot d = new Dot(3, 3);
     //d.display();
