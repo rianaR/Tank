@@ -24,8 +24,9 @@ public class Simulateur {
     public void displayMesures(){
       if (mesures !=null) {
       for (Mesure m : mesures){ 
+        fill(255,0,0);
         ellipse(m.xp,m.yp,10,10);
-        text("mesure : ("+m.xp+","+m.yp+")",m.xp,m.yp);
+        text("mesure : ("+m.xp+","+m.yp+")",m.xp+10,m.yp-10);
       }
       } 
     }
