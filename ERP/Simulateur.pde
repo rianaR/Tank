@@ -6,15 +6,15 @@ public class Simulateur {
     public Simulateur() {
         this.mobile = new Mobile(50,50,1,1);
         this.observateur = new Observateur(300,300,100,0);
-        this.observateur.setThetaMobile(atan2(mobile.getX()-observateur.getX(),
-                                                mobile.getY()-observateur.getY()));
+        this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
+                                            mobile.getX()-observateur.getX()));
     }
 
     public void update() {
         this.mobile.calculerPos();
         this.observateur.calculerPos();
-        this.observateur.setThetaMobile(atan2(mobile.getX()-observateur.getX(),
-                                                mobile.getY()-observateur.getY()));
+        this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
+                                            mobile.getX()-observateur.getX()));
     }
     
     public Mobile getMobile() {

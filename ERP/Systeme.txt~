@@ -1,0 +1,4 @@
+cos(teta1)*yp1 - sin(teta1)*xp1 + sin(teta1)*x0 + sin(teta1)*t1*vx + cos(teta1)*y0-cos(teta1)*t1*vy = 0
+cos(teta2)*yp2 - sin(teta2)*xp2 + sin(teta2)*x0 + sin(teta2)*t2*vx + cos(teta2)*y0-cos(teta2)*t2*vy = 0
+cos(teta3)*yp3 - sin(teta3)*xp3 + sin(teta3)*x0 + sin(teta3)*t3*vx + cos(teta3)*y0-cos(teta3)*t3*vy = 0
+cos(teta4)*yp4 - sin(teta4)*xp4 + sin(teta4)*x0 + sin(teta4)*t4*vx + cos(teta4)*y0-cos(teta4)*t4*vy = 0

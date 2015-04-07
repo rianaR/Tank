@@ -96,12 +96,12 @@ class Projectile {
   
     //Orientation du projectile en fonction des coordonnées de la souris sur l'image  
     public void setOrientation(int mx, int my) {
-        theta= atan2(my-metresToPix(y),mx-metresToPix(x));
+        theta= atan2(my-yToDisplay(y),mx-xToDisplay(x));
     }
 
     public void display() {
-        text("Angle : "+theta,50,100);
-        image.display(metresToPix(x),metresToPix(y),theta);
+        text("Position projectile en pixels : " + xToDisplay(x) + " "+ xToDisplay(y),600,0);
+        image.display(xToDisplay(x),yToDisplay(y),theta);
     }
 }
 

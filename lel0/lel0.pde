@@ -23,8 +23,8 @@ boolean launched;
 
 Projectile projectile;
 
-public static final float MAX_ANGLE = 0.2;
-public static final float MIN_ANGLE = -0.3;
+public static final float MAX_ANGLE = 0.5;
+public static final float MIN_ANGLE = -0.1;
 
 void updateYOrigin() {
     yOrigin = height-10;
@@ -47,7 +47,7 @@ int xToDisplay (float x) {
 }
 
 int yToDisplay (float y) {
-    return (int)(height-yOrigin-metresToPix(y));
+    return (int)(yOrigin-metresToPix(y));
 }
 
 void setup() {
@@ -106,19 +106,21 @@ void draw() {
     // successifs se redessinnent
     background(225);
 
-
+    //Obligé de passer des pixels (des entiers en fait) à la méthode atan2
+    if (!launched) {
+        projectile.setOrientation(mouseX, mouseY);
+    }
+    else {
+        projectile.update();
+    }
+    
+    projectile.display();
     //actualise l'angle de lancement du canon en fonction de la souris
     angleLanceur=atan2(mouseY-metresToPix(posLanceurY), mouseX-metresToPix(posLanceurX));
     // fonction d'affichage de la classe image definie ci dessous
     imageLanceur.display(metresToPix(posLanceurX),metresToPix(posLanceurY),angleLanceur);
-
-    //Obligé de passer des pixels (des entiers en fait) à la méthode atan2
-    projectile.setOrientation(mouseX, mouseY);
-
-    projectile.display();
-
     // image du socle du tank
-    image(imageSocle, metresToPix(posSocleX), metresToPix(posSocleY), 150, 150);
+    image(imageSocle, metresToPix(posSocleX),osSocleY), 150, 150);
 
     
     //Dot d = new Dot(3, 3);
@@ -189,7 +191,7 @@ class Image {
     
     //  !!!TOUT EST EN PIXELS!!!
     void display(int x, int y, float angle) {
-        System.out.println(angle);
+        
         // pop et push matrix permette d'applique les transfo
         // uniquement aux objet dessinés entre les 2
         pushMatrix();
@@ -201,7 +203,7 @@ class Image {
             angle = MAX_ANGLE;
         if (angle <= MIN_ANGLE)
             angle = MIN_ANGLE;
-        
+        System.out.println(angle);
         rotate(angle);
         // translate(-img.width/2, -img.height/2);
         image(img, -sizex/2, -sizey/2, sizex, sizey);

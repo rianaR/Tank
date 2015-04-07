@@ -14,4 +14,5 @@ void draw() {
     ellipse(simulateur.getMobile().getX(), simulateur.getMobile().getY(),10,10);
     fill(50);
     ellipse(simulateur.getObservateur().getX(), simulateur.getObservateur().getY(), 10,10);
+    
 }
