@@ -12,7 +12,9 @@ void setup() {
 
 
 void draw() {
+  frameRate(10);
     background(255);
+    simulateur.getObservateur().drawCircle();
     simulateur.update();
     fill(30);
     ellipse(simulateur.getMobile().getX(), simulateur.getMobile().getY(),10,10);

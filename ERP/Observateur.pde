@@ -10,7 +10,7 @@ public class Observateur {
         this.rayon=rayon;
         this.x=x0+rayon;
         this.y=y0;
-       
+       drawCircle();
         this.thetaMobile=theta0;
     }
 
@@ -29,6 +29,13 @@ public class Observateur {
     }
     public float getThetaMobile() {
         return thetaMobile;
+    }
+
+    public void drawCircle() {
+      
+      ellipseMode(CENTER);  // Set ellipseMode to CENTER
+      fill(255);  // Set fill to gray
+      ellipse(x0,y0,2*rayon,2*rayon);  // Draw gray ellipse using CENTER mode
     }
 
     public void calculerPos() {
