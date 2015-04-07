@@ -15,7 +15,6 @@ void draw() {
   frameRate(10);
     background(255);
     simulateur.getObservateur().drawCircle();
-    simulateur.displayMesuresPrises();
     simulateur.getObservateur().drawTrajectoire(200,200,1,1);
     simulateur.update();
     fill(30);
@@ -39,5 +38,7 @@ void draw() {
 void keyReleased() {
   
   clic = true;
-
+  if (keyCode == DOWN){
+   simulateur.calculerParamsMobile() ;
+  }
 }
