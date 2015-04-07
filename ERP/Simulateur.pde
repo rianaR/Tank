@@ -4,7 +4,7 @@ public class Simulateur {
     private Mobile mobile;
     private Observateur observateur;
     private Robot robot;
-    private Set<Mesure> mesures=new HashSet<Mesure>();
+    private List<Mesure> mesures=new ArrayList<Mesure>();
     
     public Simulateur() {
         this.mobile = new Mobile(200,200,1,1);
@@ -14,8 +14,8 @@ public class Simulateur {
     }
 
     public void update() {
-        this.mobile.calculerPos();
-        this.observateur.calculerPos();
+        this.mobile.nextPos();
+        this.observateur.nextPos();
         this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
                                             mobile.getX()-observateur.getX()));
     }
@@ -50,7 +50,10 @@ public class Simulateur {
     }
     
     public void addMesure(Mesure m){
-      mesures.add(m);
+        if (mesures.size() >= 4) {
+            mesures.remove(0);
+        }
+        mesures.add(m);
     }
 
   public void drawTrajectoire(float x0, float y0,float vx, float vy){
@@ -59,20 +62,12 @@ public class Simulateur {
   }
   
     public double[] calculerParamsMobile() {       
-        Mesure[] mesuresTab = new Mesure[4];
-        if (mesures.size() >= 4) {
-            int i=0;
-            for (Mesure m : mesures) {
-                if (i < 4) {
-                    mesuresTab[i] = m;
-                    i++;
-                }
-            }
+        if (observateur._4mesures) {
             double[][] a = new double[4][4];
             double[] b = new double[4];
     
             for (int l=0;l<4;l++) {
-                Mesure mesure = mesuresTab[l];
+                Mesure mesure = mesures.get(l);
                 //x0
                 a[l][0]=sin(mesure.theta);
                 //vx

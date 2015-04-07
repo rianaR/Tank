@@ -43,7 +43,7 @@ public class Observateur {
 
 
   
-    public void calculerPos() {
+    public void nextPos() {
         System.out.println("Avant : "+x+" "+y);
         float oldX=x;
         float oldY=y;

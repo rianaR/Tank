@@ -10,7 +10,7 @@ public class Mobile {
         this.vx=vx;
         this.vy=vy;
     }
-    public void calculerPos() {
+    public void nextPos() {
         x=x+vx;
         y=y+vy;
     }
