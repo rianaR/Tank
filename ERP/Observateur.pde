@@ -5,7 +5,7 @@ public class Observateur {
     private float rayon;
     private float rotationStep=PI/120;
     
-    public boolean _4mesures;
+    
     
     public Observateur(float x0, float y0, float rayon, float theta0) {
         this.x0=x0;
