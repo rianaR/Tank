@@ -3,17 +3,23 @@ public class Observateur {
     private float x0, y0;
     private float thetaMobile;
     private float rayon;
+    //Vitesse de rotation (rad/s)
+    private float w;
+    //Periode d'echantillonage
+    private float Te;
     private float rotationStep=PI/120;
     
     
     
-    public Observateur(float x0, float y0, float rayon, float theta0) {
+    public Observateur(float x0, float y0, float rayon, float w, float Te, float theta0) {
         this.x0=x0;
         this.y0=y0;
         this.rayon=rayon;
         this.x=x0+rayon;
         this.y=y0;
        drawCircle();
+        this.w=w;
+        this.Te=Te;
         this.thetaMobile=theta0;
     }
 
@@ -53,7 +59,7 @@ public class Observateur {
     public void nextPos() {
         float oldX=x;
         float oldY=y;
-        x=cos(rotationStep)*(oldX-x0)-sin(rotationStep)*(oldY-y0) + x0;
-        y=sin(rotationStep)*(oldX-x0)+cos(rotationStep)*(oldY-y0) + y0;
+        x=cos(w*Te)*(oldX-x0)-sin(w*Te)*(oldY-y0) + x0;
+        y=sin(w*Te)*(oldX-x0)+cos(w*Te)*(oldY-y0) + y0;
     }
 }

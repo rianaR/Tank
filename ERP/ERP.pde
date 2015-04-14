@@ -2,17 +2,19 @@
 
 Simulateur simulateur;
 boolean clic;
+float Fe;
 void setup() {
     size(640,480);
     frameRate(30);
     background(255);
-    simulateur = new Simulateur();
+    Fe=100;
+    simulateur = new Simulateur(1/Fe);
 }
 
 
 
 void draw() {
-    frameRate(30);
+    frameRate(Fe);
     background(255);
     simulateur.getObservateur().drawCircle();
     simulateur.drawTrajectoire(simulateur.getMobile().getX0(),
@@ -27,7 +29,7 @@ void draw() {
     if (clic) {
         text(""+simulateur.getObservateur().getThetaMobile(),simulateur.getObservateur().getX(), simulateur.getObservateur().getY());
         simulateur.addMesure(new Mesure (simulateur.getObservateur().getX(),simulateur.getObservateur().getY(),simulateur.getObservateur().getThetaMobile(),(float)millis()));
-        simulateur.calculerParamsMobile(true);
+        simulateur.calculerParamsMobile(false);
         clic=false;
     }
     

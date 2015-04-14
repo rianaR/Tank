@@ -8,12 +8,10 @@ public class Simulateur {
     private double[] paramsMobileEstimes;
     public boolean _4mesures;
 
-    public Simulateur() {
-        this.mobile = new Mobile(300,100,0.3,0.3);
-        this.observateur = new Observateur(300,250,200,0);
-        this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
-                                            mobile.getX()-observateur.getX()));
-        //this.paramsMobileEstimes=new double[0];
+    public Simulateur(float Te) {
+        this.mobile = new Mobile(30,300,20,0.2,Te);
+        this.observateur = new Observateur(300,250,200,PI/5,Te,atan2(mobile.getY()-250,
+                                            mobile.getX()-300));
     }
 
     public void update() {
@@ -36,7 +34,7 @@ public class Simulateur {
           for (Mesure m : mesures){ 
             fill(255,0,0);
             ellipse(m.xp,m.yp,10,10);
-            text("mesure : ("+m.xp+","+m.yp+")",m.xp+10,m.yp-10);
+            text("mesure : ("+m.xp+","+m.yp+","+m.theta+","+m.t+")",m.xp+10,m.yp-10);
           }
       } 
     }
@@ -60,15 +58,15 @@ public class Simulateur {
 
   public void drawTrajectoire(float x0, float y0,float vx, float vy){
     float coef = vy/vx;
-    System.out.println(coef);
     line(x0,y0,x0+1000.0f,y0+1000.0f*coef);
   }
   
     public void calculerParamsMobile(boolean allMesures) {       
         if (_4mesures) {
             int nbMesures;
+            int listSize=mesures.size();
             if (allMesures) {
-                nbMesures = mesures.size();
+                nbMesures = listSize;
             }
             else {
                 nbMesures = 4;
@@ -77,15 +75,15 @@ public class Simulateur {
             double[] b = new double[nbMesures];
     
             for (int l=0;l<nbMesures;l++) {
-                Mesure mesure = mesures.get(l);
+                Mesure mesure = mesures.get(listSize-(l+1));
                 //x0
                 a[l][0]=sin(mesure.theta);
                 //vx
-                a[l][1]=sin(mesure.theta)*mesure.t;
+                a[l][1]=sin(mesure.theta)*mesure.t/1000;
                 //y0
                 a[l][2]=-cos(mesure.theta);
                 //vy
-                a[l][3]=-cos(mesure.theta)*mesure.t;
+                a[l][3]=-cos(mesure.theta)*mesure.t/1000;
     
                 b[l]=sin(mesure.theta)*mesure.xp-cos(mesure.theta)*mesure.yp;
             }

@@ -120,7 +120,7 @@ void draw() {
     // fonction d'affichage de la classe image definie ci dessous
     imageLanceur.display(metresToPix(posLanceurX),metresToPix(posLanceurY),angleLanceur);
     // image du socle du tank
-    image(imageSocle, metresToPix(posSocleX),osSocleY), 150, 150);
+    image(imageSocle, metresToPix(posSocleX),metresToPix(posSocleY), 150, 150);
 
     
     //Dot d = new Dot(3, 3);
