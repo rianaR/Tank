@@ -22,6 +22,8 @@ class Projectile {
 
     // Affichage
     public Image image;
+    
+    public boolean launched= false;
 
     Projectile (float x0, float y0, float v0, float theta0, float m, Image image, int Te) {
         this.x=x0;
@@ -36,6 +38,21 @@ class Projectile {
         this.Te=Te;
     }
 
+
+  public void displayTrajectoire(){
+    Dot d;
+    Projectile p = new Projectile(x,y,v,theta,m,image,Te);
+  println(theta);
+    for (int i = 0; i< 1000 ; i++){
+      d = new Dot(p.x,p.y);
+      d.display();
+      p.update();
+      //System.out.println("point tracé "+ x+ " " + y+" "+n+" "+Te+" "+v+" "+vx+" "+vy);
+    }  
+    
+  }
+  
+  
     public void setK ( float k) {
         this.k=k;
     }
@@ -52,6 +69,8 @@ class Projectile {
         updateVy(); 
         updateV();
         updateTheta();
+        n++;
+        
         //update(image);
     }
 
@@ -63,7 +82,9 @@ class Projectile {
 //    }
 
     private float updateX () {
-        this.x = 0.5*k*cos(oldTheta)*(2*n - 1)*Te*Te+v0*cos(oldTheta)*Te+oldX;
+      //System.out.println("x avant "+x +"theta" + oldTheta);  
+      this.x = 0.5*k*cos(oldTheta)*(2*n - 1)*Te*Te+v0*cos(oldTheta)*Te+oldX;
+       // System.out.println("x apres "+x);
         return x;
     }
 
@@ -102,6 +123,7 @@ class Projectile {
     public void display() {
         text("Position projectile en pixels : " + xToDisplay(x) + " "+ xToDisplay(y),600,0);
         image.display(xToDisplay(x),yToDisplay(y),theta);
+        displayTrajectoire();
     }
 }
 

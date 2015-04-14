@@ -36,6 +36,12 @@ void draw() {
     simulateur.afficherParamsCalcules();
     simulateur.displayMesures();
     simulateur.displayMesuresPrises();
+    simulateur.drawEstimatedPath();
+    
+    if (simulateur.whiteNoise)
+      text(" Bruit blanc activé ", 10, 450);
+   else
+      text(" Bruit blanc non activé ", 10, 450);  
     
 }
 
@@ -43,9 +49,9 @@ void draw() {
 
 
 void keyReleased() {
-  
-  clic = true;
+  if (keyCode == UP)
+    clic = true;
   if (keyCode == DOWN){
-   //simulateur.calculerParamsMobile(true) ;
+   simulateur.whiteNoise=(!simulateur.whiteNoise);
   }
 }

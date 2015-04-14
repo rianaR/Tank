@@ -8,7 +8,7 @@ Image imageLanceur;
 float posLanceurX;
 float posLanceurY;
 float angleLanceur;
-int Fe = 20;
+int Fe = 1;
 
 int xOrigin = 10;
 int yOrigin = height-10;
@@ -23,8 +23,8 @@ boolean launched;
 
 Projectile projectile;
 
-public static final float MAX_ANGLE = 0.5;
-public static final float MIN_ANGLE = -0.1;
+public static final float MAX_ANGLE = 0.1;
+public static final float MIN_ANGLE = -0.2;
 
 void updateYOrigin() {
     yOrigin = height-10;
@@ -109,9 +109,10 @@ void draw() {
     //Obligé de passer des pixels (des entiers en fait) à la méthode atan2
     if (!launched) {
         projectile.setOrientation(mouseX, mouseY);
+        
     }
     else {
-        projectile.update();
+     //   projectile.update();
     }
     
     projectile.display();
@@ -203,11 +204,21 @@ class Image {
             angle = MAX_ANGLE;
         if (angle <= MIN_ANGLE)
             angle = MIN_ANGLE;
-        System.out.println(angle);
+        //System.out.println(angle);
         rotate(angle);
         // translate(-img.width/2, -img.height/2);
         image(img, -sizex/2, -sizey/2, sizex, sizey);
         popMatrix();
+        
+        
+         if (keyPressed) {
+          if (key == 'b' || key == 'B') {
+              launched = true;
+              projectile.launched = true;
+              System.out.println("projectile lance");
+              projectile.theta=1;
+          }
+         }
     }
 
 }

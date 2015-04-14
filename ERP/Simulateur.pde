@@ -7,6 +7,22 @@ public class Simulateur {
     private List<Mesure> mesures=new ArrayList<Mesure>();
     private double[] paramsMobileEstimes;
     public boolean _4mesures;
+    
+    public boolean whiteNoise = false;
+
+    public void drawEstimatedPath(){
+      if (paramsMobileEstimes!=null && paramsMobileEstimes.length>=4){
+        float x0 = (float)paramsMobileEstimes[0];
+        float vx = (float)paramsMobileEstimes[1];
+        float y0 = (float)paramsMobileEstimes[2];
+        float vy = (float)paramsMobileEstimes[3];
+        stroke(255,0,0);
+        drawTrajectoire(x0,y0,vx,vy);
+        stroke(0);
+      }
+      
+    }
+
 
     public Simulateur(float Te) {
         this.mobile = new Mobile(30,300,20,0.2,Te);
@@ -17,9 +33,27 @@ public class Simulateur {
     public void update() {
         this.mobile.nextPos();
         this.observateur.nextPos();
-        this.observateur.setThetaMobile(atan2(mobile.getY()-observateur.getY(),
-                                            mobile.getX()-observateur.getX()));
+        
+        this.observateur.setThetaMobile(mesureTheta(atan2(mobile.getY()-observateur.getY(),
+                                            mobile.getX()-observateur.getX())));
     }
+    
+    
+    public float mesureTheta(float mesure){
+        if (whiteNoise){
+          
+              Random rand = new Random();
+
+            // nextInt is normally exclusive of the top value,
+            // so add 1 to make it inclusive
+             float randomNum = (rand.nextFloat()-0.5)/10;
+
+            return mesure+randomNum*mesure;
+        }
+        else
+          return mesure;
+    }
+    
     
     public void displayMesuresPrises(){
       fill(0);
