@@ -23,8 +23,13 @@ boolean launched;
 
 Projectile projectile;
 
+<<<<<<< Updated upstream
 public static final float MAX_ANGLE = 0.1;
 public static final float MIN_ANGLE = -0.2;
+=======
+public static final float MAX_ANGLE = -0.5;
+public static final float MIN_ANGLE = 0.1;
+>>>>>>> Stashed changes
 
 void updateYOrigin() {
     yOrigin = height-10;
@@ -52,20 +57,22 @@ int yToDisplay (float y) {
 
 void setup() {
     size(800, 600);
+    
     updateYOrigin();
     frameRate(Fe);
     fill(255);
     // fond d'ecran blanc
     background(255);
+    
 
     //Image du socle
     imageSocle = loadImage("socle.png");
 
-    posSocleX = pixToMetres(10);
-    posSocleY = pixToMetres(height-160);
+    posSocleX = 0.2;
+    posSocleY = 3;
 
-    posLanceurX=pixToMetres(86);
-    posLanceurY= pixToMetres(height-110);
+    posLanceurX=1.3;
+    posLanceurY=2;
 
     // La classe image permet d'avoir une methode update specifique
     // en l'occurence redessinne l'image du cannon en fonction de l'angle
@@ -84,8 +91,8 @@ void setup() {
 
     //TODO
     //Position initiale : embouchure du lanceur
-    x0=pixToMetres(86);
-    y0=pixToMetres(height-110);
+    x0=1.3;
+    y0=2;
     //x0=100;
     //y0=height-100;
     System.out.println(x0);
@@ -105,6 +112,7 @@ void draw() {
     // Repeint une toile blanche pour ne pas que les dessins
     // successifs se redessinnent
     background(225);
+    updateYOrigin();
 
     //Obligé de passer des pixels (des entiers en fait) à la méthode atan2
     if (!launched) {
@@ -117,13 +125,12 @@ void draw() {
     
     projectile.display();
     //actualise l'angle de lancement du canon en fonction de la souris
-    angleLanceur=atan2(mouseY-metresToPix(posLanceurY), mouseX-metresToPix(posLanceurX));
+    angleLanceur=atan2(mouseY-yToDisplay(posLanceurY), mouseX-xToDisplay(posLanceurX));
     // fonction d'affichage de la classe image definie ci dessous
-    imageLanceur.display(metresToPix(posLanceurX),metresToPix(posLanceurY),angleLanceur);
+    imageLanceur.display(xToDisplay(posLanceurX),yToDisplay(posLanceurY),angleLanceur);
     // image du socle du tank
-    image(imageSocle, metresToPix(posSocleX),metresToPix(posSocleY), 150, 150);
-
-    
+    image(imageSocle, xToDisplay(posSocleX),yToDisplay(posSocleY), 150, 150);
+  
     //Dot d = new Dot(3, 3);
     //d.display();
 }
@@ -191,6 +198,7 @@ class Image {
     }*/
     
     //  !!!TOUT EST EN PIXELS!!!
+    // TOUT EST DANS LE REPERE PROCESSING
     void display(int x, int y, float angle) {
         
         // pop et push matrix permette d'applique les transfo
@@ -200,12 +208,17 @@ class Image {
         // par le centre
 
         translate(x, y);
-        if (angle >=MAX_ANGLE)
+        if (angle <= MAX_ANGLE)
             angle = MAX_ANGLE;
-        if (angle <= MIN_ANGLE)
+        if (angle >= MIN_ANGLE)
             angle = MIN_ANGLE;
+<<<<<<< Updated upstream
         //System.out.println(angle);
         rotate(angle);
+=======
+        System.out.println(angle);
+         rotate(angle);
+>>>>>>> Stashed changes
         // translate(-img.width/2, -img.height/2);
         image(img, -sizex/2, -sizey/2, sizex, sizey);
         popMatrix();

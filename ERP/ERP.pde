@@ -29,7 +29,7 @@ void draw() {
     if (clic) {
         text(""+simulateur.getObservateur().getThetaMobile(),simulateur.getObservateur().getX(), simulateur.getObservateur().getY());
         simulateur.addMesure(new Mesure (simulateur.getObservateur().getX(),simulateur.getObservateur().getY(),simulateur.getObservateur().getThetaMobile(),(float)millis()));
-        simulateur.calculerParamsMobile(false);
+        simulateur.calculerParamsMobile(true);
         clic=false;
     }
     

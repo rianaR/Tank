@@ -25,9 +25,9 @@ public class Simulateur {
 
 
     public Simulateur(float Te) {
-        this.mobile = new Mobile(30,300,20,0.2,Te);
-        this.observateur = new Observateur(300,250,200,PI/5,Te,atan2(mobile.getY()-250,
-                                            mobile.getX()-300));
+        this.mobile = new Mobile(200,200,3,3,Te);
+        this.observateur = new Observateur(300,250,200,PI/12,Te,atan2(mobile.getY()-200,
+                                            mobile.getX()-200));
     }
 
     public void update() {
