@@ -35,4 +35,9 @@ public class Mobile {
     public float getVy() {
         return vy;
     }
+    
+    public void display(){
+
+     ellipse(x,y,10,10); 
+    }
 }

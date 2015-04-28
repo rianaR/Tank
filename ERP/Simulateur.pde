@@ -7,8 +7,36 @@ public class Simulateur {
     private List<Mesure> mesures=new ArrayList<Mesure>();
     private double[] paramsMobileEstimes;
     public boolean _4mesures;
-    
+    public float Te;
     public boolean whiteNoise = false;
+
+  public Mobile mobileEstime;
+
+  public void getEstimatedMobile(float t){
+     if (paramsMobileEstimes!=null && paramsMobileEstimes.length>=4){
+       float x = (float)paramsMobileEstimes[0];
+       float y =(float)paramsMobileEstimes[2];
+       float vx = (float)paramsMobileEstimes[1];
+       float vy = (float)paramsMobileEstimes[3];
+        mobileEstime= new Mobile(x+vx*t/1000,y+vy*t/1000,vx,vy,Te);
+     } 
+  }
+
+    public void drawEstimatedMobile(){
+      
+     
+        
+                  
+          
+          fill(255,0,0);
+          mobileEstime.display();
+          mobileEstime.nextPos();
+          ellipse(mobileEstime.x,mobileEstime.y,10,10); 
+          fill(0);
+          System.out.println("lel");
+     
+        
+    }
 
     public void drawEstimatedPath(){
       if (paramsMobileEstimes!=null && paramsMobileEstimes.length>=4){
@@ -28,6 +56,11 @@ public class Simulateur {
         this.mobile = new Mobile(200,200,3,3,Te);
         this.observateur = new Observateur(300,250,200,PI/12,Te,atan2(mobile.getY()-200,
                                             mobile.getX()-200));
+        this.Te=Te;
+        this.mobile = new Mobile(30,300,20,0.2,Te);
+        this.observateur = new Observateur(300,250,200,PI/5,Te,atan2(mobile.getY()-250,
+                                            mobile.getX()-300));
+
     }
 
     public void update() {
@@ -50,7 +83,7 @@ public class Simulateur {
 
             return mesure+randomNum*mesure;
         }
-        else
+        
           return mesure;
     }
     
@@ -126,7 +159,7 @@ public class Simulateur {
             Matrix B = new Matrix(b,nbMesures);
     
             Matrix res = A.solve(B);
-            System.out.println("\nCalcul\n");
+            
     
             paramsMobileEstimes = res.getColumnPackedCopy();
         }

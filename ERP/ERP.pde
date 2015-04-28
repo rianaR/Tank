@@ -23,13 +23,20 @@ void draw() {
                                 simulateur.getMobile().getVy());
     simulateur.update();
     fill(30);
-    ellipse(simulateur.getMobile().getX(), simulateur.getMobile().getY(),10,10);
+    simulateur.getMobile().display();
+    fill(255,0,0);
+   
+   if(simulateur.mobileEstime!=null)
+      simulateur.drawEstimatedMobile();
+      
     fill(50);
     ellipse(simulateur.getObservateur().getX(), simulateur.getObservateur().getY(), 10,10);
     if (clic) {
         text(""+simulateur.getObservateur().getThetaMobile(),simulateur.getObservateur().getX(), simulateur.getObservateur().getY());
         simulateur.addMesure(new Mesure (simulateur.getObservateur().getX(),simulateur.getObservateur().getY(),simulateur.getObservateur().getThetaMobile(),(float)millis()));
         simulateur.calculerParamsMobile(true);
+        simulateur.getEstimatedMobile((float)millis());
+
         clic=false;
     }
     

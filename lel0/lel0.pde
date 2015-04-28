@@ -23,13 +23,9 @@ boolean launched;
 
 Projectile projectile;
 
-<<<<<<< Updated upstream
 public static final float MAX_ANGLE = 0.1;
 public static final float MIN_ANGLE = -0.2;
-=======
-public static final float MAX_ANGLE = -0.5;
-public static final float MIN_ANGLE = 0.1;
->>>>>>> Stashed changes
+
 
 void updateYOrigin() {
     yOrigin = height-10;
@@ -212,13 +208,9 @@ class Image {
             angle = MAX_ANGLE;
         if (angle >= MIN_ANGLE)
             angle = MIN_ANGLE;
-<<<<<<< Updated upstream
         //System.out.println(angle);
         rotate(angle);
-=======
-        System.out.println(angle);
-         rotate(angle);
->>>>>>> Stashed changes
+
         // translate(-img.width/2, -img.height/2);
         image(img, -sizex/2, -sizey/2, sizex, sizey);
         popMatrix();
