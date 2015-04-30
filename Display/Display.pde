@@ -1,7 +1,7 @@
 
   
       
-public static final int windowHeight = 768;
+public static final int windowHeight = 700;
 public static final int windowWidth = 1024;
 
 public Environment environment = new Environment();
@@ -22,6 +22,9 @@ void setup(){
     size(windowWidth,windowHeight);
     fill(255);
     background(255);
+
+    environment.tank.tankImage = loadImage("socle.png");
+    environment.tank.cannon.cannonImage = loadImage("cannon.png");
 }
 
 // METERS INPUT

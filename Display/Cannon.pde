@@ -1,8 +1,7 @@
 
 public class Cannon {
  
- 
-  
+    public PImage cannonImage;
   // metres
 float cannonHeight = 2;
 float cannonWidth = 3;
@@ -22,6 +21,8 @@ float x,y;
 // cannon extremity
 float cannonMouthX,cannonMouthY;
 
+
+
 public void setCannonMouth(float cannonMouthX,float cannonMouthY){
  this.cannonMouthX = cannonMouthX;
 this.cannonMouthY = cannonMouthY; 
@@ -31,9 +32,6 @@ this.cannonMouthY = cannonMouthY;
 public void varyInitialSpeed(float dx){
    initialSpeed+=dx; 
 }
-
-
-public PImage cannonImage = loadImage("C:/Users/Benjamin/Documents/SI4/CPU/Processing/Tank/Display/data/cannon.png");
 
 
 //Environment.metersToPixels(tankHeight),Environment.metersToPixels(tankWidth));
