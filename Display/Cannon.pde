@@ -11,7 +11,7 @@ public class Cannon {
 private static final float LIMIT_ANGLE_MIN = -PI/3;
 private static final float LIMIT_ANGLE_MAX =  0;
 private float angle;
-    private float initialSpeed = 1.5;
+    private float initialSpeed = 15;
     private float Te = 0.1;
     private float m= 10;
 
