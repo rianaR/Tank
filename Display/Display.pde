@@ -16,7 +16,7 @@ public int metersToPixels(float meters){
    return (int) (meters*ratioPixelsByMeters); 
 }
 
-
+boolean launched = false;
 
 void setup(){
     size(windowWidth,windowHeight);
@@ -118,6 +118,10 @@ void draw() {
     environment.tank.cannon.setCannonMouth(pixelToMetres((int)nextX),pixelToMetres((int)(windowHeight-nextY)));
    //ellipse(nextX,nextY,10,10);
    displayFloor();
+   
+   fill(0);
+   if (launched)
+     text("Projectile launched", 10,80);
 }
 
 void keyPressed(){
@@ -130,6 +134,10 @@ void keyPressed(){
     environment.tank.cannon.varyInitialSpeed(step);
    if (keyCode == DOWN)
     environment.tank.cannon.varyInitialSpeed(-step); 
+   if (keyCode== ' '){
+     launched= true;
+     
+   }
 }
 
 void keyReleased() {

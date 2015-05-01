@@ -12,7 +12,7 @@ class Projectile {
     public float oldTheta, oldX, oldY, oldVx, oldVy;
     
     // Etat de l'objet
-    public float theta, x, y, vx, vy, v, k,Te;
+    public float theta,theta0, x, y, vx, vy, v, k,Te;
 
     // Elements de discretisation
     public int n;
@@ -30,6 +30,7 @@ class Projectile {
         this.v=v0;
         this.vx = cos(theta0)*v;
         this.vy = sin(theta0)*v;
+        this.theta0 = theta0;
         this.theta=theta0;    
         this.k=0;
         this.Te=Te;
@@ -62,7 +63,7 @@ class Projectile {
     private float updateX () {
       //System.out.println("x avant "+x +"theta" + oldTheta);  
       oldX=x;
-      this.x = 0.5*k*cos(oldTheta)*(2*n - 1)*Te*Te+v0*cos(oldTheta)*Te+oldX;
+      this.x = 0.5*k*cos(oldTheta)*(2*n - 1)*Te*Te+v0*cos(theta0)*Te+oldX;
        // System.out.println("x apres "+x);
         return x;
     }
@@ -71,7 +72,7 @@ class Projectile {
       oldY= y;
       //println("y = "+ y+ "   oldTheta "+ oldTheta + " m"+m+"  Te "+Te+"  k"+k+"  n "+n);
       //println(" n="+n+" lel " +((-m*g+k*sin(oldTheta))*(2*n-1)*Te*Te));
-        this.y = 0.5*(-m*g+k*sin(oldTheta))*(2*n-1)*Te*Te+v0*sin(oldTheta)*Te+oldY;
+        this.y = 0.5*(-m*g+k*sin(oldTheta))*(2*n-1)*Te*Te+v0*sin(theta0)*Te+oldY;
         //println("y' = "+ y);
         return y;
     }
