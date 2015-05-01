@@ -12,6 +12,8 @@ private static final float LIMIT_ANGLE_MIN = -PI/3;
 private static final float LIMIT_ANGLE_MAX =  0;
 private float angle;
     private float initialSpeed = 1.5;
+    private float Te = 0.1;
+    private float m= 10;
 
     //metres
     float x, y;
@@ -69,7 +71,7 @@ private float angle;
         displayDot(cannonMouthX, cannonMouthY);
         //text("Cannon Mouth :"+cannonMouthX+" "+cannonMouthY,10,40);
 
-        Trajectory t = new Trajectory(cannonMouthX, cannonMouthY, initialSpeed, -angle, 0.01, 1, ground0);
+        Trajectory t = new Trajectory(cannonMouthX, cannonMouthY, initialSpeed, -angle,m,Te, ground0);
         t.displayTrajectory();
     }
 

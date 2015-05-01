@@ -4,7 +4,7 @@ public class Trajectory {
     Projectile projectile;
     float ground0;
 
-    public Trajectory (float x0, float y0, float v0, float theta0, float m, int Te, float ground0) {
+    public Trajectory (float x0, float y0, float v0, float theta0, float m, float Te, float ground0) {
 
         projectile = new Projectile(x0, y0, v0, theta0, m, Te);
         this.ground0=ground0;
@@ -27,6 +27,7 @@ public class Trajectory {
             xf = projectile.x;
             yf = projectile.y;
             displayLine(x, y, xf, yf);
+            //println("jalon");
         }
 
 

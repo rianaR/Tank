@@ -22,7 +22,7 @@ void setup() {
     size(windowWidth, windowHeight);
     fill(255);
     background(255);
-
+  
     environment.tank.tankImage = loadImage("socle.png");
     environment.tank.cannon.cannonImage = loadImage("cannon.png");
 }
@@ -139,9 +139,27 @@ void keyPressed(){
      launched= true;
      
    }
+}
 
 void keyReleased() {
     if (keyCode == UP)
         environment.tank.cannon.sendProjectile();
 }
 
+
+    // create and return a random M-by-N matrix with values between 0 and 1
+    public Matrix random(int M, int N) {
+        Matrix A = new Matrix(M, N);
+        for (int i = 0; i < M; i++)
+            for (int j = 0; j < N; j++)
+                A.data[i][j] = (float)Math.random();
+        return A;
+    }
+
+    // create and return the N-by-N identity matrix
+    public Matrix identity(int N) {
+        Matrix I = new Matrix(N, N);
+        for (int i = 0; i < N; i++)
+            I.data[i][i] = 1;
+        return I;
+    }
