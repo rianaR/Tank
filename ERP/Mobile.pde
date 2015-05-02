@@ -1,5 +1,5 @@
 public class Mobile {
-    private float x,y;
+    private float x, y;
     private float x0, y0;
     private float vx, vy;
     private float Te;
@@ -35,9 +35,10 @@ public class Mobile {
     public float getVy() {
         return vy;
     }
-    
-    public void display(){
 
-     ellipse(x,y,10,10); 
+    public void display() {
+
+        ellipse(x, y, 10, 10);
     }
 }
+

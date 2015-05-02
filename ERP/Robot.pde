@@ -11,6 +11,5 @@ public class Robot {
         this.vx=vx;
         this.vy=vy;
     }
-
-    
 }
+
