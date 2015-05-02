@@ -1,6 +1,6 @@
 
 
-Simulateur simulateur;
+Simulator simulator;
 boolean clic;
 float Fe;
 void setup() {
@@ -8,7 +8,7 @@ void setup() {
     frameRate(30);
     background(255);
     Fe=100;
-    simulateur = new Simulateur(1/Fe);
+    simulator = new Simulator(1/Fe);
 }
 
 
@@ -16,36 +16,37 @@ void setup() {
 void draw() {
     frameRate(Fe);
     background(255);
-    simulateur.getObservateur().drawCircle();
-    simulateur.drawTrajectoire(simulateur.getMobile().getX0(), 
-    simulateur.getMobile().getY0(), 
-    simulateur.getMobile().getVx(), 
-    simulateur.getMobile().getVy());
-    simulateur.update();
+    simulator.getObserver().drawCircle();
+    simulator.drawTrajectory(simulator.getMobile().getX0(), 
+    simulator.getMobile().getY0(), 
+    simulator.getMobile().getVx(), 
+    simulator.getMobile().getVy());
+    simulator.update();
     fill(30);
-    simulateur.getMobile().display();
+    simulator.getMobile().display();
     fill(255, 0, 0);
 
-    if (simulateur.mobileEstime!=null)
-        simulateur.drawEstimatedMobile();
+    if (simulator.mobileEstime!=null)
+        simulator.drawEstimatedMobile();
 
     fill(50);
-    ellipse(simulateur.getObservateur().getX(), simulateur.getObservateur().getY(), 10, 10);
+    ellipse(simulator.getObserver().getX(), simulator.getObserver().getY(), 10, 10);
     if (clic) {
-        text(""+simulateur.getObservateur().getThetaMobile(), simulateur.getObservateur().getX(), simulateur.getObservateur().getY());
-        simulateur.addMesure(new Mesure (simulateur.getObservateur().getX(), simulateur.getObservateur().getY(), simulateur.getObservateur().getThetaMobile(), (float)millis()));
-        simulateur.calculerParamsMobile(true);
-        simulateur.getEstimatedMobile((float)millis());
+        text(""+simulator.getObserver().getThetaMobile(), simulator.getObserver().getX(), simulator.getObserver().getY());
+        //En secondes
+        simulator.addMeasure(new Measure (simulator.getObserver().getX(), simulator.getObserver().getY(), simulator.getObserver().getThetaMobile(), (float)(millis()/1000.0f)));
+        simulator.calculateMobileParams(true);
+        simulator.getEstimatedMobile((float)millis()/1000);
 
         clic=false;
     }
 
-    simulateur.afficherParamsCalcules();
-    simulateur.displayMesures();
-    simulateur.displayMesuresPrises();
-    simulateur.drawEstimatedPath();
+    simulator.displayCalculatedParams();
+    simulator.displayMeasures();
+    simulator.displayNbMeasures();
+    simulator.drawEstimatedPath();
 
-    if (simulateur.whiteNoise)
+    if (simulator.whiteNoise)
         text(" Bruit blanc activé ", 10, 450);
     else
         text(" Bruit blanc non activé ", 10, 450);
@@ -58,7 +59,7 @@ void keyReleased() {
     if (keyCode == UP)
         clic = true;
     if (keyCode == DOWN) {
-        simulateur.whiteNoise=(!simulateur.whiteNoise);
+        simulator.whiteNoise=(!simulator.whiteNoise);
     }
 }
 

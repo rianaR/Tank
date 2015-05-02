@@ -1,4 +1,4 @@
-public class Observateur {
+public class Observer {
     private float x, y;
     private float x0, y0;
     private float thetaMobile;
@@ -11,7 +11,7 @@ public class Observateur {
 
 
 
-    public Observateur(float x0, float y0, float rayon, float w, float Te, float theta0) {
+    public Observer(float x0, float y0, float rayon, float w, float Te, float theta0) {
         this.x0=x0;
         this.y0=y0;
         this.rayon=rayon;
