@@ -64,7 +64,7 @@ private float angle;
         float angleDegres = -angle*180/PI;
         text("Cannon angle : "+angleDegres+"°", 10, 20);
         text("Initial Speed : "+initialSpeed+" m/s", 10, 40);
-        text("Weight : "+initialSpeed+" kg", 10, 80);
+        text("Weight : "+m+" kg", 10, 80);
 
         //println(" "+x+","+y+" "+cannonWidth+" "+cannonHeight+" "+angle);
         displayImage(cannonImage, x, y, cannonWidth, cannonHeight, angle);

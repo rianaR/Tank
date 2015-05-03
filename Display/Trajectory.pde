@@ -15,7 +15,7 @@ public class Trajectory {
         float x0 = projectile.x;
         float y0 = projectile.y;
         float xf=x0, yf=y0;
-        for (int i=0; projectile.y>=ground0 && i<=100; i++) {
+        for (int i=0; projectile.y>=ground0 && i<=20; i++) {
             fill(0, 0, 255);
 
             float x = projectile.x;
@@ -30,7 +30,7 @@ public class Trajectory {
             //println("jalon");
         }
 
-
+        text("last point : "+xf+","+yf,160,20);
         text("range "+(xf-x0)+" m", 10, 60);
         fill(0);
         strokeWeight(5);

@@ -29,7 +29,7 @@ class Projectile {
     
     public  Matrix X,X0,A,B,Un;
     
-    public int nbPeriodes=20;
+    public int nbPeriodes=5;
 
 
     public boolean launched= false;
@@ -47,16 +47,17 @@ class Projectile {
         this.Te=Te;
         this.m = m;
        // coefficient de poussé 
-       eps = v0/m;
-        
+       //eps = v0/m;
+       eps=1;
+        text("X0 : +"+x0+" "+vx+" "+y+" "+vy,10,100);
        
        double[][]  xTab = {{x},{vx},{y},{vy}};
         X0 = new Matrix(xTab);
         
-    double[][] bTab = {{eps*Te*Te/2,0},{eps*Te,0},{0,eps*Te*Te/2},{0,eps*Te}};
-    
-    B = new Matrix(bTab);
-    
+        
+        double[][] bTab = {{eps*Te*Te/2,0},{eps*Te,0},{0,eps*Te*Te/2},{0,eps*Te}};
+        B = new Matrix(bTab);
+        //B.print(4,3);
     
     setBoucle();
  
@@ -152,20 +153,31 @@ class Projectile {
                     };
                     
       Matrix aP = new Matrix(aTab);
+      Matrix A = new Matrix(aTab);
       Matrix aPbD= new Matrix(4,4);
-      for(int i=0;i<2*nbPeriodes;i+=2){
+      //aP.print(4,3);
+      //B.print(4,2);
+      for(int i=2*nbPeriodes-4;i>=0;i-=2){
         
         for(int j=0;j<4;j++){
            aPbD = aP.times(B);
           G.set(j,i,aPbD.get(j,0));
           G.set(j,i+1,aPbD.get(j,1));
         }
-        
-        aP=aP.times(aP);
-        //aPbD.print(4,2);
-      // G.print(4,2);
+  
+        //println(i);
+       // aP.print(4,3);
+        aP=aP.times(A);
+        //aPbD.print(4,2);      
       }
-      
+            for(int j=0;j<4;j++){
+              
+           aPbD = aP.times(B);
+          G.set(j,2*nbPeriodes-2,B.get(j,0));
+          G.set(j,2*nbPeriodes-1,B.get(j,1));
+        }
+  
+     //  G.print(4,3);
       
       
       Matrix U = new Matrix(2,nbPeriodes);
@@ -174,24 +186,60 @@ class Projectile {
      Matrix C = new Matrix(cTab);
      
       Matrix Y = C.minus(aP.times(X0));
-      //G.print(4,2);
+      //Y.print(4,3);
+      
+     //G.print(4,3);
       Matrix Gt = G.transpose();
-     Gt.print(4,2);
+     //Gt.print(4,2);
       U = (Gt.times((G.times(Gt)).inverse())).times(Y);
   
       a = U;
-      a.print(5,2);
-       
+      //U.print(4,3);
+      /*
+      for(int j=0;j<a.getRowDimension();j+=2){
+        a.set(j,0,a.get(j,0)-g/eps);
+      } */
      
       
-        //U.print(0,0);
+        //a.print(4,3);
+        
+        /*
+        double[][] provTab ={
+       { 67.5},                 
+ { - 65.9090909090908923},  
+    {50.8333333333333428  },
+  {- 54.1515151515151487  },
+   { 34.1666666666666714  },
+  {- 42.3939393939393838  },
+  {  17.4999999999999822},  
+  {- 30.6363636363636154  },
+    {0.83333333333330195  },
+  {- 18.8787878787878576  },
+  {- 15.8333333333333712  },
+  {- 7.12121212121208558  },
+  {- 32.5000000000000355  },
+   { 4.6363636363636616   },
+  {- 49.1666666666667140  },
+   { 16.3939393939394265  },
+  {- 65.8333333333333854  },
+   { 28.1515151515151700  },
+  {- 82.5000000000000568},  
+    {39.909090909090942 }
+    
+    };
+    
+    a = new Matrix(provTab);
+   */
     }
+   
+   
+   
    
 // Application of the formula Xn+1 = A Xn + Ba
 // With A defined in the constructor
 // B
     public void update(){
-      iterator++;
+      
      double[][]  xTab = {{x},{vx},{y},{vy}};
         X = new Matrix(xTab);
     
@@ -200,15 +248,18 @@ class Projectile {
     //double[][] unTab = {{0},{-g/eps}};
     //a.print(4,2);
     double[][] unTab = new double[2][1];
-    if (iterator+1 < a.getRowDimension()){
-      unTab[0][0] = a.get(iterator,0);
-      unTab[1][0] =a.get(iterator+1,0)-g/eps;
+    if (2*iterator < a.getRowDimension()){
+      unTab[0][0] = a.get(2*iterator,0);
+      unTab[1][0] =a.get(2*iterator+1,0);//-g/eps;
     }
     Un = new Matrix(unTab);
     
     
-    //Un = a;
     
+    //Un = a;
+    println(iterator);
+iterator++;
+    Un.print(4,2);
     
       double[][] aTab = {
                        {1,Te,0,0 },
