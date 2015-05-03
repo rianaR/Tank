@@ -8,8 +8,9 @@ public class Observer {
     //Periode d'echantillonage
     private float Te;
     private float rotationStep=PI/120;
-
-
+    private boolean robotSent= false;
+    private Robot robot;
+    private Mobile estimatedMobile;
 
     public Observer(float x0, float y0, float rayon, float w, float Te, float theta0) {
         this.x0=x0;
@@ -23,6 +24,14 @@ public class Observer {
         this.thetaMobile=theta0;
     }
 
+  public void setEstimatedMobile(Mobile mobile){   
+    this.estimatedMobile= mobile;  
+  }
+  
+  public void sendRobot(){
+     robotSent= true;
+    robot = new Robot(x,y,Te,100,estimatedMobile); 
+  }
     public void setThetaMobile(float thetaMobile) {
         this.thetaMobile=thetaMobile;
     }
@@ -49,9 +58,18 @@ public class Observer {
 
     public void drawCircle() {
 
-        ellipseMode(CENTER);  // Set ellipseMode to CENTER
-        fill(255);  // Set fill to gray
-        ellipse(x0, y0, 2*rayon, 2*rayon);  // Draw gray ellipse using CENTER mode
+        
+        if (robotSent){
+            robot.display();
+        }
+        else {
+         
+         ellipseMode(CENTER);  // Set ellipseMode to CENTER
+         fill(255);  // Set fill to gray
+         ellipse(x0, y0, 2*rayon, 2*rayon);  // Draw gray ellipse using CENTER mode
+        
+         
+        }
     }
 
 
@@ -61,6 +79,9 @@ public class Observer {
         float oldY=y;
         x=cos(w*Te)*(oldX-x0)-sin(w*Te)*(oldY-y0) + x0;
         y=sin(w*Te)*(oldX-x0)+cos(w*Te)*(oldY-y0) + y0;
+            if (robotSent){
+            robot.update();
+        }
     }
 }
 

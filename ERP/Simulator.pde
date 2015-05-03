@@ -3,13 +3,13 @@ import java.util.*;
 public class Simulator {
     private Mobile mobile;
     private Observer observer;
-    private Robot robot;
+    //private Robot robot;
     private List<Measure> measures=new ArrayList<Measure>();
     private double[] estimatedMobileParams;
     public boolean _4measures;
     public float Te;
     public boolean whiteNoise = false;
-
+    public boolean sendRobot = false;
     public Mobile mobileEstime;
 
 
@@ -29,6 +29,7 @@ public class Simulator {
             float vx = (float)estimatedMobileParams[1];
             float vy = (float)estimatedMobileParams[3];
             mobileEstime= new Mobile(x+vx*t, y+vy*t, vx, vy, Te);
+            observer.setEstimatedMobile(mobileEstime);
         }
     }
 
@@ -38,7 +39,7 @@ public class Simulator {
         mobileEstime.nextPos();
         ellipse(mobileEstime.x, mobileEstime.y, 10, 10); 
         fill(0);
-        System.out.println("lel");
+       // System.out.println("lel");
     }
 
     public void drawEstimatedPath() {
@@ -102,10 +103,7 @@ public class Simulator {
     public Observer getObserver() {
         return this.observer;
     }
-    public Robot getRobot() {
-        return this.robot;
-    }
-
+    
     public void addMeasure(Measure m) {
         measures.add(m);
         if (measures.size() == 4) {
@@ -165,4 +163,3 @@ public class Simulator {
         }
     }
 }
-

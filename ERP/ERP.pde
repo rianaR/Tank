@@ -7,7 +7,7 @@ void setup() {
     size(640, 480);
     frameRate(30);
     background(255);
-    Fe=100;
+    Fe=60;
     simulator = new Simulator(1/Fe);
 }
 
@@ -61,5 +61,7 @@ void keyReleased() {
     if (keyCode == DOWN) {
         simulator.whiteNoise=(!simulator.whiteNoise);
     }
+    if (keyCode == ' ')
+      simulator.observer.sendRobot();
 }
 
