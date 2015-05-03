@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 
 public static final int windowHeight = 700;
@@ -52,7 +52,7 @@ public void displayImage (PImage image, float x, float y, float sizeX, float siz
 
 
 // meters again
-public void displayDot(float x, float y) {
+public void displayDot(float x, float y, float _width) {
 
 
     int xDisplay = metersToPixels(x);
@@ -61,13 +61,20 @@ public void displayDot(float x, float y) {
 
     fill(0, 0, 255);
     stroke(0, 0, 255);
-    ellipse(xDisplay, yDisplay, 10, 10);
+    ellipse(xDisplay, yDisplay, _width, _width);
     //text("Cannon Mouth :"+xDisplay+" "+yDisplay,10,60);
 }
 
 
+public void displayTarget(float x, float y){
+ 
+    displayDot(x,y,30);
+  
+}
+
 public void displayFloor() {
-    fill(50, 0, 50);
+  stroke(0);
+    fill(180, 0,0);
     rect(0, windowHeight-metersToPixels(environment.tank.y), windowWidth, windowHeight);
 }
 
@@ -95,7 +102,7 @@ void draw() {
 
 
     environment.tank.display();
-
+    environment.target.display();
     int imageHeight = metersToPixels(environment.tank.cannon.cannonHeight);
     int imageWidth = metersToPixels(environment.tank.cannon.cannonWidth);
     // to calculate the angle between the cursor and the cannon
@@ -122,7 +129,7 @@ void draw() {
    
    fill(0);
    if (launched)
-     text("Projectile launched", 10,80);
+     text("Projectile launched", 10,100);
 }
 
 void keyPressed(){
@@ -146,7 +153,7 @@ void keyReleased() {
         environment.tank.cannon.sendProjectile();
 }
 
-
+/*
     // create and return a random M-by-N matrix with values between 0 and 1
     public Matrix random(int M, int N) {
         Matrix A = new Matrix(M, N);
@@ -163,3 +170,12 @@ void keyReleased() {
             I.data[i][i] = 1;
         return I;
     }
+  */  
+    public static float[] addElem(float f,float [] tab){
+     float [] elTab = new float[tab.length+1];
+     elTab[0]= f;
+     for (int i=0;i<tab.length;i++)
+         elTab[i+1]=tab[i];
+      return elTab;
+    }
+    
