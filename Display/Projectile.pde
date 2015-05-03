@@ -29,7 +29,7 @@ class Projectile {
     
     public  Matrix X,X0,A,B,Un;
     
-    public int nbPeriodes=5;
+    public int nbPeriodes=15;
 
 
     public boolean launched= false;
